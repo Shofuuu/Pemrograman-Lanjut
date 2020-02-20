@@ -1,23 +1,80 @@
 #!/usr/bin/python3
 
 # waktu start 6:52
-# end        38:06
-min_start = 52
-min_total = 38
+# 7:12 - 8:32
 
-hour_start = 6
-hour_total = 0
-time = 0
+class ATime():
+    time_min = ""
+    time_hour = ""
+    time_sec = ""
 
-if min_start+min_total > 60:
-    min_diff = (min_start + min_total)-60
-    hour_total = hour_start + 1
-time = "0"+str(hour_total)+":"+str(min_diff)
+    def __init__(self, time_str):
+        self.time_str = time_str
+        self.time_hour, self.time_min, self.time_sec = self.parse_time(self.time_str)
 
-waktu = "073016"
-print((detik[4]+detik[5]))
+    def parse_time(self, time_now):
+        time_min_tmp = ""
+        time_hour_tmp = ""
+        time_sec_tmp = ""
+        total_dot = 0
 
-print("Mulai berjalan pukul 06:52")
-print("waktu :", time)
-#print("3km leb
-# ih cepat 7:12 | waktu", time_two_s)
+        for time_len in range(len(time_now)):
+            if time_now[time_len] != ":":
+                if total_dot == 0:
+                    time_hour_tmp += time_now[time_len]
+                elif total_dot == 1:
+                    time_min_tmp += time_now[time_len]
+                elif total_dot == 2:
+                    time_sec_tmp += time_now[time_len]
+            else:
+                total_dot+=1
+        return time_hour_tmp, time_min_tmp, time_sec_tmp
+
+    def add(self, time_now):
+        hour_now, mnt_now, sec_now = self.parse_time(time_now)
+
+        hour_tmp = "0"
+        mnt_tmp = "0"
+        sec_tmp = "0"
+
+        if (int(self.time_hour) + int(hour_now)) > 23:
+            hour_diff = (int(self.time_hour) + int(hour_now)) - 23
+            hour_tmp = str(hour_diff)
+        else:
+            hour_tmp = int(self.time_hour) + int(hour_now)
+
+        if (int(self.time_min) + int(mnt_now)) > 59:
+            mnt_diff = (int(self.time_min) + int(mnt_now)) - 60
+            mnt_tmp = str(mnt_diff)
+            hour_tmp = str(int(self.time_hour) + int(hour_now) + 1)
+        else:
+            mnt_tmp = int(self.time_min) + int(mnt_now)
+
+        if (int(self.time_sec) + int(sec_now)) > 59:
+            sec_diff = (int(self.time_sec) + int(sec_now)) - 60
+            sec_tmp = str(sec_diff)
+            mnt_tmp = str(int(self.time_sec) + int(mnt_now)+ 1)
+        else:
+            sec_tmp = int(self.time_sec) + int(sec_now)
+
+        self.time_hour = hour_tmp
+        self.time_min = mnt_tmp
+        self.time_sec = sec_tmp
+
+    def now(self):
+        self.time_hour = "0"+str(self.time_hour) if int(self.time_hour) < 10 else self.time_hour
+        self.time_min = "0"+str(self.time_min) if int(self.time_min) < 10 else self.time_min
+        self.time_sec = "0"+str(self.time_sec) if int(self.time_sec) < 10 else self.time_sec
+        return str(self.time_hour) +":"+ str(self.time_min) +":"+ str(self.time_sec)
+
+if __name__ == "__main__":
+    print("Mulai berjalan jalan")
+    waktu = ATime("6:52:0") # format jj:mm:dd
+
+    print("1km perjalanan awal", waktu.now())
+    waktu.add("0:8:15")
+    print("3km perjalanan kedua", waktu.now())
+    waktu.add("0:7:12")
+    print("1km sebelum sampai rumah", waktu.now())
+    waktu.add("0:8:15")
+    print("Sampai dirumah jam", waktu.now())
