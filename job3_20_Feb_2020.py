@@ -28,53 +28,45 @@ class ATime():
                     time_sec_tmp += time_now[time_len]
             else:
                 total_dot+=1
+        #print("#parse_time", time_hour_tmp, time_min_tmp, time_sec_tmp)
         return time_hour_tmp, time_min_tmp, time_sec_tmp
 
     def add(self, time_now):
         hour_now, mnt_now, sec_now = self.parse_time(time_now)
 
-        hour_tmp = "0"
-        mnt_tmp = "0"
-        sec_tmp = "0"
-
         if (int(self.time_hour) + int(hour_now)) > 23:
             hour_diff = (int(self.time_hour) + int(hour_now)) - 23
-            hour_tmp = str(hour_diff)
+            self.time_hour = str(hour_diff)
         else:
-            hour_tmp = int(self.time_hour) + int(hour_now)
+            self.time_hour = int(self.time_hour) + int(hour_now)
 
         if (int(self.time_min) + int(mnt_now)) > 59:
-            mnt_diff = (int(self.time_min) + int(mnt_now)) - 60
+            mnt_diff = (int(self.time_min) + int(mnt_now)) - 59
             mnt_tmp = str(mnt_diff)
-            hour_tmp = str(int(self.time_hour) + int(hour_now) + 1)
+            self.time_hour = str(int(self.time_hour) + int(hour_now) + 1)
         else:
-            mnt_tmp = int(self.time_min) + int(mnt_now)
+            self.time_min = int(self.time_min) + int(mnt_now)
 
         if (int(self.time_sec) + int(sec_now)) > 59:
-            sec_diff = (int(self.time_sec) + int(sec_now)) - 60
-            sec_tmp = str(sec_diff)
-            mnt_tmp = str(int(self.time_sec) + int(mnt_now)+ 1)
+            sec_diff = (int(self.time_sec) + int(sec_now)) - 59
+            self.time_sec = str(sec_diff)
+            self.time_min = str(int(self.time_min) + int(mnt_now)+ 1)
         else:
-            sec_tmp = int(self.time_sec) + int(sec_now)
-
-        self.time_hour = hour_tmp
-        self.time_min = mnt_tmp
-        self.time_sec = sec_tmp
+            self.time_sec = int(self.time_sec) + int(sec_now)
 
     def now(self):
-        self.time_hour = "0"+str(self.time_hour) if int(self.time_hour) < 10 else self.time_hour
-        self.time_min = "0"+str(self.time_min) if int(self.time_min) < 10 else self.time_min
-        self.time_sec = "0"+str(self.time_sec) if int(self.time_sec) < 10 else self.time_sec
+        self.time_hour = "0"+str(self.time_hour) if len(str(self.time_hour)) < 2 else self.time_hour
+        self.time_min = "0"+str(self.time_min) if len(str(self.time_min)) < 2 else self.time_min
+        self.time_sec = "0"+str(self.time_sec) if len(str(self.time_sec)) < 2 else self.time_sec
         return str(self.time_hour) +":"+ str(self.time_min) +":"+ str(self.time_sec)
 
 if __name__ == "__main__":
-    print("Mulai berjalan jalan")
-    waktu = ATime("6:52:0") # format jj:mm:dd
+    waktu = ATime("06:52:0") # format jj:mm:dd
+    print("Mulai berjalan jalan", waktu.now())
 
+    waktu.add("00:08:15")
     print("1km perjalanan awal", waktu.now())
-    waktu.add("0:8:15")
+    waktu.add("0:07:12")
     print("3km perjalanan kedua", waktu.now())
-    waktu.add("0:7:12")
+    waktu.add("00:08:15")
     print("1km sebelum sampai rumah", waktu.now())
-    waktu.add("0:8:15")
-    print("Sampai dirumah jam", waktu.now())
