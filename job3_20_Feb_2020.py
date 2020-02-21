@@ -32,7 +32,7 @@ class ATime():
         time_diff = 0
 
         if (int(self.time_hour) + int(time_hour_now)) >= 23:
-            time_diff = (int(self.time_hour) + int(time_hour_now)) - 23
+            time_diff = (int(self.time_hour) + int(time_hour_now)) - 24
             self.time_hour = str(time_diff)
         else:
             self.time_hour = str(int(self.time_hour) + int(time_hour_now))
