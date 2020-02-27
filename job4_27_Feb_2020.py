@@ -6,9 +6,15 @@ flag = False
 
 if sisi_a <= (sisi_b + sisi_c):
     flag = True
+
 if sisi_b <= (sisi_c + sisi_a):
     flag = True
+else:
+    flag = False
+
 if sisi_c <= (sisi_a + sisi_b):
     flag = True
+else:
+    flag = False
 
 print("Hasil Cek : ", "YA" if flag == True else  "TIDAK")
