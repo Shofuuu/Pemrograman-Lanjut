@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 def convert(data, fr):
     # 0 for fahrenheit
     # 1 for celsius
@@ -7,23 +8,23 @@ def convert(data, fr):
     else:
         return (float(data) * 9 / 5) + 32
 
-
-choo = input("1). Fahrenheit --> Celcius\n2). Celcius --> Fahrenheit\nPilihan> ")
 sign = ""
 data = 0
 
-if int(choo) == 1 or int(choo) == 2:
-    data = float(input("angka> "))
+while True:
+    choo = input("1). Fahrenheit --> Celcius\n2). Celcius --> Fahrenheit\nPilihan> ")
 
-    if int(choo) == 1:
-        data = convert(data, 0)
-        sign = "°C"
-    elif int(choo) != 1:
-        data = convert(data, 1)
-        sign = "°F"
+    if int(choo) == 1 or int(choo) == 2:
+        data = float(input("angka> "))
 
-    print("Hasil =", round(data), sign)
-else:
-    print("Salah coeg..")
+        if int(choo) == 1:
+            data = convert(data, 0)
+            sign = "°C"
+        else:
+            data = convert(data, 1)
+            sign = "°F"
 
-
+        print("Hasil =", round(data), sign)
+        break
+    else:
+        print("Salah Input\n")

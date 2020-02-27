@@ -32,6 +32,8 @@ for x in range(5):
     value = random.randint(-bottom_val, top_val)
     if value < 0:
         sign = " Negatif"
+    elif value == 0:
+        continue
     else:
         sign = " Positif"
     print("Random cek sign ke " + str(x) + sign, value)

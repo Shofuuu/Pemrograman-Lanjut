@@ -1,4 +1,4 @@
-
+#!/usr/bin/python3
 # JANGAN MENGUBAH BAGIAN PROGRAM YANG SUDAH DISIAPKAN.
 # Silakan menulis bagian program anda pada area yang sudah disiapkan
 import tkinter as tk
@@ -35,11 +35,13 @@ benar = 0
 
 for counter in range(3):
     print("[Try - ", counter, "]")
-    tebak = input("Tebak Angka > ")
+    tebak = int(input("Tebak Angka > "))
 
     if tebak == guest:
         benar = 1
         break
+    else:
+        print("Salah!\n")
 
 # end of your program
 pesan(benar)  # jangan dihapus
