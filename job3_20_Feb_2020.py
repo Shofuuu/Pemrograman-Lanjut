@@ -58,7 +58,6 @@ class ATime():
             return num
 
     def now(self):
-
         return self.num2time_format(self.time_hour) + ":" + self.num2time_format(self.time_min) + ":" + self.num2time_format(self.time_sec)
 
 if __name__ == "__main__":
