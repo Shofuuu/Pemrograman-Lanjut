@@ -41,7 +41,7 @@ for counter in range(3):
         benar = 1
         break
     else:
-        print("Salah!\n")
+        print("Try -1\n")
 
 # end of your program
 pesan(benar)  # jangan dihapus
