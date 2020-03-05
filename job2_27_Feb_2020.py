@@ -43,5 +43,6 @@ for counter in range(3):
     else:
         print("Try -1\n")
 
+print("Jawaban :", guest)
 # end of your program
 pesan(benar)  # jangan dihapus
