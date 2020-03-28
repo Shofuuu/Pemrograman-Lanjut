@@ -47,16 +47,16 @@ def cmd_help(index = 'all'):
             'depend':'', 'msg':'Show this help message'
         },
         'add' : {
-            'depend':'nama kelas nilai score', 'msg':'Add new data'
+            'depend':'nama kelas nilai score\n\texample : add mrx A 10 E', 'msg':'Add new data'
         },
         'replace' : {
-            'depend':'nama (kelas | nilai | score) value', 'msg':'Change value from selected label'
+            'depend':'nama (kelas | nilai | score) value\n\texample : replace mrx kelas A', 'msg':'Change value from selected label'
         },
         'delete' : {
-            'depend':'nama', 'msg':'Delete the selected data'
+            'depend':'nama\n\texample : delete mrx', 'msg':'Delete the selected data'
         },
         'show' : {
-            'depend':'(all | nama)', 'msg':'Add new data'
+            'depend':'(all | nama)\n\texample : show all', 'msg':'Show saved data in table'
         },
         'clear' : {
             'depend':'', 'msg':'clear the current screen'
@@ -74,7 +74,7 @@ def cmd_help(index = 'all'):
     else:
         for cmd, msg in help_msg.items():
             print(' [*] ', cmd, msg['depend'])
-            print('\t\t', msg['msg'])
+            print('\t\t', msg['msg'], end='\n\n')
 
 def cmd_parse(cmd):
     args = []
