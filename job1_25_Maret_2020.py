@@ -221,7 +221,8 @@ def main():
                 print('[*] Type \'help\' for more informations\n')
         except:
             print('\n[-] Error while processing the command!')
-            print('[*] Type \'help\' for more informations\n')
+            print('[*] Type \'help\' for more informations')
+            print('[*] Type \'exit\' to close this application\n')
 
 if __name__ == '__main__':
     main()
