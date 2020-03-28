@@ -6,27 +6,27 @@ from platform import system
 main_data = {
     'Tuti' : {
         'kelas' : 'A',
-        'nilai' : 35,
+        'nilai' : '35',
         'score' : 'C'
     },
     'Shinta' : {
         'kelas' : 'B',
-        'nilai' : 99,
+        'nilai' : '99',
         'score' : 'A+'
     },
     'Dodi' : {
         'kelas' : 'A',
-        'nilai' : 70,
+        'nilai' : '70',
         'score' : 'B'
     },
     'Rizal' : {
         'kelas' : 'B',
-        'nilai' : 62,
+        'nilai' : '62',
         'score' : 'C'
     },
     'Alex' : {
         'kelas' : 'B',
-        'nilai' : 85,
+        'nilai' : '85',
         'score' : 'A'
     }
 }
@@ -63,6 +63,9 @@ def cmd_help(index = 'all'):
         },
         'banner' : {
             'depend':'', 'msg':'Show banner ascii art'
+        },
+        'exit' : {
+            'depend':'', 'msg':'Exit from this application'
         }
     }
 
@@ -87,37 +90,51 @@ def cmd_parse(cmd):
     return args[0], args[1:len(args)]
 
 def draw_table(*label, key='all'):
+    # TOP LABEL BEGIN
     print('+' + '-'*(get_key_max()+2) + '+', end='')
     for x in range(len(label)-1):
         print('-'*(get_key_max()+2) + '+', end='')
 
-    print('\n|' + ' '*int( ((get_key_max()+2)-len(label[0]))/2 ) + label[0] + ' '*int( (((((get_key_max()+2)-len(label[0]))/2) + len(label[0]))/2)-1 ) + '|', end='')
+    print('\n|' + ' '*( int((get_key_max()+2)/2)-2 ) + label[0] + ' '*((get_key_max()+2)-((int((get_key_max()+2)/2)-2) + len(label[0]))) + '|', end='')
     for x in range(1, len(label)):
-        print(' '*int( ((get_key_max()+2)-len(label[x]))/2 ) + label[x] + ' '*int( (((((get_key_max()+2)-len(label[0]))/2) + len(label[0]))/2)-1 ) + '|', end='')
+        print(' '*( int((get_key_max()+2)/2)-2 ) + label[x] + ' '*((get_key_max()+2)-((int((get_key_max()+2)/2)-2) + len(label[x]))) + '|', end='')
+
+    print('\n+' + '-'*(get_key_max()+2) + '+', end='')
+    for x in range(len(label)-1):
+        print('-'*(get_key_max()+2) + '+', end='')
+    # TOP LABEL END
+
+    if key != 'all':
+        print('\n|' + key + ' '*((get_key_max()+2)-len(key)) + '|', end='')
+        for sdata in main_data[key]:
+            print(main_data[key][sdata] + ' '*((get_key_max()+2)-len(main_data[key][sdata])) + '|', end='')
+    else:
+        for skey in main_data.keys():
+            print('\n|' + skey + ' '*((get_key_max()+2)-len(skey)) + '|', end='')
+            for sdata in main_data[skey]:
+                print(main_data[skey][sdata] + ' '*((get_key_max()+2)-len(main_data[skey][sdata])) + '|', end='')
 
     print('\n+' + '-'*(get_key_max()+2) + '+', end='')
     for x in range(len(label)-1):
         print('-'*(get_key_max()+2) + '+', end='')
 
-    print('\n|' + key + ' '*int( (get_key_max()+2)-len(key) ) + '|', end='')
-    for sdata in main_data[key]:
-        print('\n|' + main_data[key][sdata] + ' '*int( (get_key_max()+2)-main_data[key][sdata] ) + '|', end='')
 def cmd_show(cmd, args = 'all'):
-    if args != 'all':
-        if args[0] not in main_data.keys():
-            print('[-] Data not found!\n')
-        else:
+    if len(args) < 1 or len(args) > 1:
+        print('[-] Error while processing the argument!\n')
+        print(cmd_help(cmd))
+    else:
+        if (args[0] in main_data.keys()) or (args[0] == 'all'):
             draw_table('Nama', 'Kelas', 'Nilai', 'Score', key=args[0])
             print('\n')
-    else:
-        print('otwe')
+        else:
+            print('[-] Data not found!\n')
 
 def cmd_delete():
     print('otwe')
 
 def cmd_add(cmd, args):
-    if len(args) < 4:
-        print('[-] Need more argument!\n')
+    if len(args) < 4 or len(args) > 4:
+        print('[-] Error while processing the argument!\n')
         print(cmd_help(cmd))
     else:
         main_data[args[0]] = {'kelas' : args[1], 'nilai' : args[2], 'score':args[3]}
