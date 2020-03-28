@@ -56,7 +56,7 @@ def cmd_help(index = 'all'):
             'depend':'nama', 'msg':'Delete the selected data'
         },
         'show' : {
-            'depend':'all | nama', 'msg':'Add new data'
+            'depend':'(all | nama)', 'msg':'Add new data'
         },
         'clear' : {
             'depend':'', 'msg':'clear the current screen'
@@ -145,11 +145,22 @@ def cmd_add(cmd, args):
         print('[-] Error while processing the argument!\n')
         print(cmd_help(cmd))
     else:
-        main_data[args[0]] = {'kelas' : args[1], 'nilai' : args[2], 'score':args[3]}
-        print('[+] Data added successfully\n')
+        if args[0] in main_data.keys():
+            print('[-] Conflict key name with \'' + args[0] + '\'\n' )
+        else:
+            main_data[args[0]] = {'kelas' : args[1], 'nilai' : args[2], 'score':args[3]}
+            print('[+] Data added successfully\n')
 
-def cmd_replace():
-    print('otwe')
+def cmd_replace(cmd, args):
+    if len(args) < 3 or len(args) > 3:
+        print('[-] Error while processing the argument!\n')
+        print(cmd_help(cmd))
+    else:
+        if args[0] in main_data.keys():
+            main_data[args[0]][args[1]] = args[2]
+            print('[+] Data changed successfully\n')
+        else:
+            print('[-] Data not found!\n')
 
 def main():
     # Generate using : http://patorjk.com/software/taag/#p=display&f=Small&t=DataBase
@@ -185,27 +196,31 @@ def main():
     print('Welcome! type \'help\' for help message')
 
     while True:
-        cmd = input("(menu)~$ ")
-        command, arg = cmd_parse(cmd)
+        try:
+            cmd = input("(menu)~$ ")
+            command, arg = cmd_parse(cmd)
 
-        if command == 'help':
-            cmd_help()
-        elif command == 'add':
-            cmd_add(command, arg)
-        elif command == 'exit':
-            break
-        elif command == 'banner':
-            print(banner[random.randint(0,2)])
-        elif command == 'clear':
-            clrscr()
-        elif command == 'show':
-            cmd_show(command, arg)
-        elif command == 'delete':
-            cmd_delete(command, arg)
-        elif command == 'replace':
-            cmd_replace()
-        else:
-            print('[-] No such command called \'' + command + '\'')
+            if command == 'help':
+                cmd_help()
+            elif command == 'add':
+                cmd_add(command, arg)
+            elif command == 'exit':
+                break
+            elif command == 'banner':
+                print(banner[random.randint(0,2)])
+            elif command == 'clear':
+                clrscr()
+            elif command == 'show':
+                cmd_show(command, arg)
+            elif command == 'delete':
+                cmd_delete(command, arg)
+            elif command == 'replace':
+                cmd_replace(command, arg)
+            else:
+                print('[-] No such command called \'' + command + '\'')
+                print('[*] Type \'help\' for more informations\n')
+        except:
+            print('\n[-] Error while processing the command!')
             print('[*] Type \'help\' for more informations\n')
 
 if __name__ == '__main__':
