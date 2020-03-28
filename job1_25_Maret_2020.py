@@ -47,16 +47,16 @@ def cmd_help(index = 'all'):
             'depend':'', 'msg':'Show this help message'
         },
         'add' : {
-            'depend':'[nama] [kelas] [nilai] [score]', 'msg':'Add new data'
+            'depend':'nama kelas nilai score', 'msg':'Add new data'
         },
         'replace' : {
-            'depend':'[nama] select (kelas | nilai | score) [value]', 'msg':'Change value from selected label'
+            'depend':'nama (kelas | nilai | score) value', 'msg':'Change value from selected label'
         },
         'delete' : {
-            'depend':'[nama]', 'msg':'Delete the selected data'
+            'depend':'nama', 'msg':'Delete the selected data'
         },
         'show' : {
-            'depend':'(all | [nama])', 'msg':'Add new data'
+            'depend':'all | nama', 'msg':'Add new data'
         },
         'clear' : {
             'depend':'', 'msg':'clear the current screen'
@@ -129,8 +129,16 @@ def cmd_show(cmd, args = 'all'):
         else:
             print('[-] Data not found!\n')
 
-def cmd_delete():
-    print('otwe')
+def cmd_delete(cmd, args):
+    if len(args) < 1 or len(args) > 1:
+        print('[-] Error while processing the argument!\n')
+        print(cmd_help(cmd))
+    else:
+        if args[0] in main_data.keys():
+            main_data.pop(args[0])
+            print('[+] Data deleted!\n')
+        else:
+            print('[-] Data not found!\n')
 
 def cmd_add(cmd, args):
     if len(args) < 4 or len(args) > 4:
@@ -191,6 +199,8 @@ def main():
             clrscr()
         elif command == 'show':
             cmd_show(command, arg)
+        elif command == 'delete':
+            cmd_delete(command, arg)
         else:
             print('[-] No such command called \'' + command + '\'')
             print('[*] Type \'help\' for more informations\n')
