@@ -34,7 +34,7 @@ print("Mengacak Angka..")
 benar = 0
 
 for counter in range(3):
-    print("[Try - ", counter, "]")
+    print("[Try -", counter, "]")
     tebak = int(input("Tebak Angka > "))
 
     if tebak == guest:
