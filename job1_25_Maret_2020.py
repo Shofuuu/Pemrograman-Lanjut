@@ -152,6 +152,7 @@ def cmd_replace():
     print('otwe')
 
 def main():
+    # Generate using : http://patorjk.com/software/taag/#p=display&f=Small&t=DataBase
     banner = [
     """
         ██████╗  █████╗ ████████╗ █████╗ ██████╗  █████╗ ███████╗███████╗
@@ -201,6 +202,8 @@ def main():
             cmd_show(command, arg)
         elif command == 'delete':
             cmd_delete(command, arg)
+        elif command == 'replace':
+            cmd_replace()
         else:
             print('[-] No such command called \'' + command + '\'')
             print('[*] Type \'help\' for more informations\n')
