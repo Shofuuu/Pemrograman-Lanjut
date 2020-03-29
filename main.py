@@ -1,18 +1,28 @@
 #!/usr/bin/python3
-str = "Simple adder"
-print(str)
-x = int(input("Data 1 : "))
-y = float(input("Data 2 : "))
-z = input("Random Text : ")
+data = [
+    ['apel', 'mangga', 'jeruk'],
+    [2000, 5000, 3500]
+]
+print(data)
 
-print("x + y =", (x+y), "| tipe :", type(x))
+index = 0
+buah, harga = data
 
-y = int(y)
-data_logic = {"x and y":(x&y), "x or y":(x|y), "x xor y":(x^y), "x == y":(x==y), "x > y":(x>y)}
-data_arith = {"x+y":x+y, "x-y":x-y, "x/y":x/y, "x*y":x*y, "x**y":x**y}
+for urutan in range(len(buah)):
+    print(index, 'Buah', buah[urutan], 'harganya', harga[urutan])
+    index += 1
 
-print(data_logic.keys())
-print(data_logic.values())
-print("\n", data_arith.keys())
-print(data_arith.values())
-print("Random " + z + " Text")
+counter = 0
+for cek in buah:
+    if cek == 'mangga':
+        break
+    else:
+        counter += 1
+
+print('\nmangga berada pada index', counter)
+
+data[0].pop(counter) # hapus buah
+data[1].pop(counter) # hapus harga
+print('mangga dihapus!')
+
+print(data)
