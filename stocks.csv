@@ -10,3 +10,5 @@ year,industry_code_ANZSIC,industry_name_ANZSIC,rme_size_grp,variable,value,unit
 2011,A,"Agriculture, Forestry and Fishing",a_0,Fixed tangible assets,32155,DOLLARS(millions)
 2011,A,"Agriculture, Forestry and Fishing",b_1-5,Activity unit,21777,COUNT
 2020,A,"Agriculture, Foresty and Fishing",b_1-6,Activity Unit,8000,DOLLARS(Million)
+2020,A,"Agriculture, Foresty and Fishing",b_1-6,Activity Unit,8000,DOLLARS(Million)
+2020,A,"Agriculture, Foresty and Fishing",b_1-6,Activity Unit,8000,DOLLARS(Million)
