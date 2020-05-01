@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import os, shutil, python
+import os, shutil
 
 parentFolder = 'tugas7'
 fltext = 'file.txt'
@@ -23,4 +23,3 @@ if check:
 else: make_folder()
 
 print('[+] selesai')
-python.__python__()
